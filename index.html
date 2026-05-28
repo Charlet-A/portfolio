@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC | Professional Portfolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+    
+:root{
+    --grad-1:#8b5cf6;
+    --grad-2:#df053b;
+    --text-dim:#cfcfcf;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Outfit',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+#progressScroll {
+    position: fixed; bottom: 30px; right: 30px; width: 75px; height: 75px;
+    border: none; border-radius: 50%; background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px); display: flex; justify-content: center;
+    align-items: center; cursor: pointer; z-index: 999;
+    opacity: 0; visibility: hidden; transform: translateY(20px);
+    transition: 0.4s ease;
+}
+#progressScroll.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.progress-path {
+    fill: none; stroke: url(#gradientStroke); stroke-width: 4;
+    stroke-linecap: round; stroke-dasharray: 176; stroke-dashoffset: 176;
+    transition: stroke-dashoffset 0.1s linear;
+}
+.bg-circle { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 4; }
+.arrow-box { position: absolute; color: white; font-size: 24px; transition: 0.4s; }
+#progressScroll.top-mode .arrow-box { transform: rotate(180deg); }
+body{
+    background:linear-gradient(135deg,#0a0512,#1a0b2e);
+    min-height:100vh;
+    color:#fff;
+    padding:20px;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+.main-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    background:rgba(10,5,20,0.9);
+    border-radius:50px;
+    position:sticky;
+    top:20px;
+    z-index:1000;
+
+    border:2px solid transparent;
+    background-image:
+    linear-gradient(rgba(10,5,20,0.9),rgba(10,5,20,0.9)),
+    linear-gradient(90deg,var(--grad-1),var(--grad-2),var(--grad-1));
+
+    background-origin:border-box;
+    background-clip:padding-box,border-box;
+}
+
+.logo-container{
+    font-size:1.8rem;
+    font-weight:800;
+    background:linear-gradient(45deg,#f65cd5,#f10467);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    cursor:pointer;
+}
+
+.main-nav{
+    display:flex;
+    gap:10px;
+}
+
+.nav-link{
+    text-decoration:none;
+    color:var(--text-dim);
+    padding:10px 20px;
+    border-radius:30px;
+    transition:.4s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-link:hover{
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    box-shadow:0 0 20px var(--grad-2);
+}
+
+.nav-contact-btn{
+    background:#0a0512;
+    color:#fff;
+    padding:10px 30px;
+    border-radius:30px;
+    cursor:pointer;
+    border:2px solid transparent;
+
+    background-image:
+    linear-gradient(#0a0512,#0a0512),
+    linear-gradient(90deg,#f65ce9,#f1124a,#f1058f);
+
+    background-origin:border-box;
+    background-clip:padding-box,border-box;
+
+    transition:.4s;
+    font-weight:600;
+}
+
+.nav-contact-btn:hover{
+    box-shadow:0 0 20px var(--grad-2);
+}
+
+.menu-toggle{
+    display:none;
+    font-size:1.6rem;
+    cursor:pointer;
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    min-height:85vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.text-section{
+    max-width:850px;
+}
+
+.text-section h3{
+    color:#8b5cf6;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.text-section h1{
+    font-size:2.5rem;
+    margin-bottom:10px;
+}
+
+.highlight{
+    color:var(--grad-2);
+}
+
+.typing{
+    color:#ec4899;
+    border-right:3px solid #fff;
+    padding-right:5px;
+    animation:blink .7s infinite;
+}
+
+@keyframes blink{
+    50%{
+        border-color:transparent;
+    }
+}
+
+.text-section p{
+    margin-top:20px;
+    color:#ccc;
+    line-height:1.8;
+    font-size:1rem;
+}
+
+.btn-group{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.hero-btn{
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 20px var(--grad-2);
+
+}
+
+.primary-btn{
+    background:linear-gradient(45deg,#8b5cf6,#f1124a);
+    color:white;
+}
+
+.secondary-btn{
+    cursor:pointer;
+    border:2px solid transparent;
+color:white;
+    background-image:
+    linear-gradient(#0a0512,#0a0512),
+    linear-gradient(90deg,#f65ce9,#f1124a,#f1058f);
+
+    background-origin:border-box;
+    background-clip:padding-box,border-box;
+
+    transition:.4s;
+    font-weight:600;
+}
+
+.social-links{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.social-links a{
+    color:white;
+    font-size:1.5rem;
+    transition:.3s;
+}
+
+.social-links a:hover{
+    color:#ec4899;
+    transform:translateY(-4px);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .main-header{
+        padding:15px 20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .main-nav{
+        position:fixed;
+        top:90px;
+        right:-100%;
+        width:230px;
+        background:rgba(20,10,30,0.98);
+        backdrop-filter:blur(20px);
+        flex-direction:column;
+        padding:30px;
+        border-radius:20px;
+        border:1px solid var(--grad-1);
+        transition:.4s;
+        z-index:999;
+    }
+
+    .main-nav.active{
+        right:20px;
+    }
+
+    .nav-link{
+        padding:12px 0;
+        font-size:1rem;
+    }
+
+    .nav-contact-btn{
+        display:none;
+    }
+
+    .text-section h1{
+        font-size:2rem;
+    }
+
+    .text-section p{
+        font-size:1rem;
+    }
+    .nav-link i{
+    margin-right: 10px;
+}
+
+.nav-link:hover i{
+    transform: translateX(5px);
+}
+}
+/* ================= ABOUT SECTION ================= */
+
+.about-section{
+    width:100%;
+    min-height:100vh;
+    background:#0f172a;
+    padding:100px 10%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.about-container{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:70px;
+    align-items:center;
+}
+
+/* IMAGE */
+
+.about-image{
+    display:flex;
+    justify-content:center;
+}
+
+.image-box{
+    width:350px;
+    height:450px;
+    border-radius:25px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(135deg,#00f5ff,#6a5cff);
+    padding:5px;
+    box-shadow:0 0 40px rgba(0,245,255,0.3);
+    transition:0.5s ease;
+}
+
+.image-box:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:20px;
+}
+
+/* CONTENT */
+
+.about-content{
+    color:white;
+}
+
+.section-tag{
+    color:#00f5ff;
+    font-size:18px;
+    letter-spacing:3px;
+    font-weight:600;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.about-content h2{
+    font-size:35px;
+    line-height:1.5;
+    margin:20px 0;
+    font-weight:700;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.about-text{
+    color:#cbd5e1;
+    line-height:1.9;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.about-text span{
+    color:#00f5ff;
+    font-weight:600;
+}
+
+/* STATS */
+
+.about-stats{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:40px;
+    flex-wrap:nowrap;   /* ore line la irukum */
+}
+
+.stat-box{
+    width:220px;
+    background:rgba(255,255,255,0.05);
+    padding:30px 20px;
+    border-radius:20px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.08);
+    transition:0.4s;
+}
+
+.stat-box:hover{
+    transform:translateY(-8px);
+    border-color:#00f5ff;
+    background:rgba(0,245,255,0.08);
+    box-shadow:0 0 25px rgba(0,245,255,0.2);
+}
+
+.stat-box h3{
+    font-size:38px;
+    color:#00f5ff;
+    margin-bottom:10px;
+}
+
+.stat-box p{
+    color:#cbd5e1;
+    font-size:15px;
+}
+
+/* BUTTON CENTER */
+
+.about-buttons{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;  /* center la button */
+    align-items:center;
+}
+
+.btn-primary{
+    display:inline-block;
+    padding:15px 35px;
+    background:#00f5ff;
+    color:#000;
+    text-decoration:none;
+    border-radius:50px;
+    font-weight:600;
+    transition:0.4s ease;
+}
+
+.btn-primary:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px #00f5ff;
+}
+
+/* MOBILE VIEW FIX */
+
+@media(max-width:768px){
+
+    .about-section{
+        padding:80px 7%;
+        min-height:auto;
+    }
+
+    .about-container{
+        grid-template-columns:1fr;   /* single column */
+        gap:50px;
+    }
+
+    .about-image{
+        order:1;
+    }
+
+    .about-content{
+        order:2;
+        text-align:center;
+    }
+
+    .image-box{
+        width:100%;
+        max-width:320px;
+        height:400px;
+    }
+
+    .about-content h2{
+        font-size:28px;
+        line-height:1.4;
+    }
+
+    .about-text{
+        font-size:15px;
+        line-height:1.8;
+    }
+
+    /* STATS */
+
+    .about-stats{
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+    }
+
+    .stat-box{
+        width:100%;
+        max-width:300px;
+    }
+
+    /* BUTTON */
+
+    .about-buttons{
+        justify-content:center;
+    }
+}
+/* =========================
+        SKILLS SECTION
+========================= */
+
+.skills-section{
+    width:100%;
+    padding:110px 10%;
+    overflow:hidden;
+}
+
+/* =========================
+          HEADER
+========================= */
+
+.skills-header{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-tag{
+    color:#00f5ff;
+    font-size:15px;
+    letter-spacing:3px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.skills-header h2{
+    font-size:48px;
+    color:white;
+    margin-bottom:18px;
+    line-height:1.3;
+}
+
+.skills-subtext{
+    color:#cbd5e1;
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    font-size:16px;
+}
+
+/* =========================
+          SLIDER
+========================= */
+
+.skills-slider{
+    width:100%;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* =========================
+          WRAPPER
+========================= */
+.skills-wrapper {
+    width: 100%; /* Full width eduthukatum */
+    max-width: 1080px; /* Max 3 cards space */
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.skills-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 330px; 
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Last card cut aagama iruka */
+    padding-right: 20px; 
+}
+
+/* =========================
+            CARD
+========================= */
+
+.skill-card{
+    min-width:330px;
+    height:280px;
+
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:28px;
+    padding:35px 28px;
+
+    backdrop-filter:blur(12px);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:0.4s ease;
+}
+
+/* GLOW EFFECT */
+
+.skill-card::before{
+    content:"";
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    background:rgba(0,245,255,0.08);
+
+    border-radius:50%;
+
+    top:-60px;
+    right:-60px;
+}
+
+/* HOVER */
+
+.skill-card:hover{
+    transform:translateY(-8px);
+
+    border-color:#00f5ff;
+
+    box-shadow:
+        0 0 25px rgba(0,245,255,0.18),
+        0 0 45px rgba(106,92,255,0.08);
+}
+
+/* =========================
+            ICON
+========================= */
+
+.skill-icon{
+    width:70px;
+    height:70px;
+
+    border-radius:20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#00f5ff,#6a5cff);
+
+    font-size:30px;
+    color:white;
+
+    margin-bottom:22px;
+
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+            TITLE
+========================= */
+
+.skill-card h3{
+    color:white;
+    font-size:24px;
+    margin-bottom:15px;
+
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+            TEXT
+========================= */
+
+.skill-card p{
+    color:#cbd5e1;
+    line-height:1.8;
+    font-size:15px;
+
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+          BUTTONS
+========================= */
+
+.slide-btn{
+    width:55px;
+    height:55px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+    font-size:18px;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    transition:0.4s ease;
+
+    z-index:10;
+}
+
+/* BUTTON HOVER */
+
+.slide-btn:hover{
+    background:#00f5ff;
+    color:#000;
+    transform:scale(1.1);
+}
+
+/* BUTTON SPACING */
+
+.left-btn{
+    margin-right:25px;
+}
+
+.right-btn{
+    margin-left:25px;
+}
+
+/* =========================
+          MOBILE
+========================= */
+
+@media (max-width: 768px) {
+    /* Buttons-a hide panna */
+    .slide-btn {
+        display: none; 
+    }
+
+    /* Grid-a column-ah maatha */
+    .skills-grid {
+        display: flex;
+        flex-direction: column; /* Keezha keezha varum */
+        align-items: center;
+        gap: 20px;
+        transition: none; /* Mobile-la animation thevailai */
+        transform: none !important; /* Force reset */
+        width: 100%;
+    }
+
+    .skill-card {
+        width: 90%; /* Mobile screen-ku etha mathiri */
+        min-width: auto;
+    }
+    
+    .skills-wrapper {
+        width: 100%;
+        overflow: visible; /* Mobile-la full content theriyum */
+    }
+}
+/* =========================
+      EXPERIENCE SECTION
+========================= */
+
+.experience-section{
+    width:100%;
+    padding:110px 10%;
+    background:#0b1120;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.experience-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-tag{
+    color:#00f5ff;
+    font-size:15px;
+    letter-spacing:3px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.experience-header h2{
+    font-size:48px;
+    color:white;
+    margin-bottom:18px;
+}
+
+/* TIMELINE */
+
+.timeline{
+    position:relative;
+    max-width:900px;
+    margin:auto;
+}
+
+/* CENTER LINE */
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+
+    width:3px;
+    height:100%;
+
+    background:linear-gradient(
+        to bottom,
+        #00f5ff,
+        #6a5cff
+    );
+}
+
+/* ITEM */
+
+.timeline-item{
+    width:100%;
+    position:relative;
+    margin-bottom:60px;
+}
+
+/* CARD */
+
+.experience-card{
+    width:42%;
+    padding:35px 30px;
+
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:28px;
+
+    backdrop-filter:blur(12px);
+
+    transition:0.4s ease;
+
+    position:relative;
+}
+
+/* LEFT */
+
+.timeline-item:nth-child(odd)
+.experience-card{
+    left:0;
+}
+
+/* RIGHT */
+
+.timeline-item:nth-child(even)
+.experience-card{
+    left:58%;
+}
+
+/* HOVER */
+
+.experience-card:hover{
+    transform:translateY(-8px);
+
+    border-color:#00f5ff;
+
+    box-shadow:
+        0 0 25px rgba(0,245,255,0.18),
+        0 0 45px rgba(106,92,255,0.08);
+}
+
+/* DOT */
+
+.timeline-dot{
+    position:absolute;
+
+    left:50%;
+    top:35px;
+
+    transform:translateX(-50%);
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    background:#00f5ff;
+
+    box-shadow:
+        0 0 15px #00f5ff;
+}
+
+/* YEAR */
+
+.experience-year{
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(0,245,255,0.12);
+
+    color:#00f5ff;
+
+    font-size:14px;
+    font-weight:600;
+
+    margin-bottom:18px;
+}
+
+/* TITLE */
+
+.experience-card h3{
+    color:white;
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+/* SUBTITLE */
+
+.experience-card h4{
+    color:#8ea2c9;
+    font-size:16px;
+    margin-bottom:18px;
+    font-weight:500;
+}
+
+/* TEXT */
+
+.experience-card p{
+    color:#cbd5e1;
+    line-height:1.9;
+    font-size:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .experience-section{
+        padding:90px 7%;
+    }
+
+    .experience-header{
+        margin-bottom:50px;
+    }
+
+    .experience-header h2{
+        font-size:34px;
+    }
+
+    /* REMOVE LINE CENTER */
+
+    .timeline::before{
+        left:18px;
+    }
+
+    .timeline-dot{
+        left:18px;
+    }
+
+    .experience-card{
+        width:100%;
+        left:0 !important;
+
+        margin-left:45px;
+    }
+}
+/* =========================
+        PROJECT SECTION
+========================= */
+
+.projects-section{
+    width:100%;
+    padding:110px 10%;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.projects-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-tag{
+    color:#00f5ff;
+    font-size:15px;
+    letter-spacing:3px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.projects-header h2{
+    color:white;
+    font-size:48px;
+    margin-bottom:18px;
+}
+
+.projects-subtext{
+    color:#cbd5e1;
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+}
+
+/* CONTAINER */
+
+.portfolio-container{
+    display:flex;
+    gap:35px;
+    align-items:stretch;
+}
+
+/* =========================
+        LEFT SIDE
+========================= */
+
+.project-tabs{
+    width:35%;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* TAB BUTTON */
+
+.tab-btn{
+    padding:22px 25px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:22px;
+
+    color:#cbd5e1;
+
+    font-size:16px;
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:0.4s ease;
+
+    backdrop-filter:blur(12px);
+}
+
+/* ACTIVE */
+
+.tab-btn.active{
+    background:linear-gradient(135deg,#00f5ff,#6a5cff);
+
+    color:white;
+
+    transform:translateX(8px);
+
+    box-shadow:
+        0 0 25px rgba(0,245,255,0.2);
+}
+
+/* HOVER */
+
+.tab-btn:hover{
+    border-color:#00f5ff;
+}
+
+/* =========================
+        RIGHT SIDE
+========================= */
+
+.project-display{
+    flex:1;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:30px;
+
+    padding:50px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(12px);
+}
+
+/* GLOW */
+
+.project-display::before{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    background:rgba(0,245,255,0.08);
+
+    border-radius:50%;
+
+    top:-80px;
+    right:-80px;
+}
+
+/* CONTENT */
+
+.project-content{
+    display:none;
+    position:relative;
+    z-index:2;
+}
+
+.project-content.active-project{
+    display:block;
+    animation:fade 0.5s ease;
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* COUNT */
+
+.project-count{
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(0,245,255,0.12);
+
+    color:#00f5ff;
+
+    font-size:14px;
+    font-weight:600;
+
+    margin-bottom:20px;
+}
+
+/* TITLE */
+
+.project-content h3{
+    color:white;
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+/* TEXT */
+
+.project-content p{
+    color:#cbd5e1;
+    line-height:2;
+    font-size:16px;
+
+    margin-bottom:35px;
+
+    max-width:650px;
+}
+
+/* BUTTON */
+
+.project-view-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+
+    padding:15px 28px;
+
+    background:linear-gradient(135deg,#00f5ff,#6a5cff);
+
+    border-radius:50px;
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:0.4s ease;
+}
+
+/* BUTTON HOVER */
+
+.project-view-btn:hover{
+    transform:translateY(-5px);
+    gap:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .projects-section{
+        padding:90px 7%;
+    }
+
+    .projects-header h2{
+        font-size:34px;
+    }
+
+    .portfolio-container{
+        flex-direction:column;
+    }
+
+    .project-tabs{
+        width:100%;
+    }
+
+    .project-display{
+        padding:35px 28px;
+    }
+
+    .project-content h3{
+        font-size:28px;
+    }
+}
+/* =========================
+    CERTIFICATION SECTION
+========================= */
+
+.certification-section{
+    width:100%;
+    padding:110px 10%;
+    background:#0b1120;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.certification-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-tag{
+    color:#00f5ff;
+    font-size:15px;
+    letter-spacing:3px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.certification-header h2{
+    color:white;
+    font-size:48px;
+    margin-bottom:18px;
+}
+
+.certification-subtext{
+    color:#cbd5e1;
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    font-size:16px;
+}
+
+/* =========================
+        TIMELINE
+========================= */
+
+.certificate-timeline{
+    position:relative;
+    max-width:850px;
+    margin:auto;
+}
+
+/* CENTER LINE */
+
+.certificate-timeline::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:0;
+
+    transform:translateX(-50%);
+
+    width:3px;
+    height:100%;
+
+    background:linear-gradient(
+        to bottom,
+        #00f5ff,
+        #6a5cff
+    );
+}
+
+/* ITEM */
+
+.certificate-item{
+    position:relative;
+    width:100%;
+    margin-bottom:45px;
+}
+
+/* CONTENT */
+
+.certificate-content{
+    width:42%;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:24px;
+
+    padding:28px 30px;
+
+    backdrop-filter:blur(12px);
+
+    transition:0.4s ease;
+}
+
+/* LEFT */
+
+.certificate-item:nth-child(odd)
+.certificate-content{
+    margin-left:0;
+}
+
+/* RIGHT */
+
+.certificate-item:nth-child(even)
+.certificate-content{
+    margin-left:58%;
+}
+
+/* HOVER */
+
+.certificate-content:hover{
+    transform:translateY(-6px);
+
+    border-color:#00f5ff;
+
+    box-shadow:
+        0 0 25px rgba(0,245,255,0.18);
+}
+
+/* DOT */
+
+.certificate-dot{
+    position:absolute;
+
+    left:50%;
+    top:32px;
+
+    transform:translateX(-50%);
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    background:#00f5ff;
+
+    box-shadow:
+        0 0 15px #00f5ff;
+}
+
+/* TITLE */
+
+.certificate-content h3{
+    color:white;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+/* COMPANY */
+
+.certificate-content span{
+    color:#00f5ff;
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .certification-section{
+        padding:90px 7%;
+    }
+
+    .certification-header{
+        margin-bottom:50px;
+    }
+
+    .certification-header h2{
+        font-size:34px;
+    }
+
+    /* LINE */
+
+    .certificate-timeline::before{
+        left:18px;
+    }
+
+    /* DOT */
+
+    .certificate-dot{
+        left:18px;
+    }
+
+    /* CONTENT */
+
+    .certificate-content{
+        width:100% !important;
+        margin-left:45px !important;
+    }
+}
+.contact-section {
+  padding: 120px 10%;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+/* HEADER */
+.contact-header h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.contact-header p {
+  color: #aab4c8;
+  margin-bottom: 50px;
+}
+
+/* GRID */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+.contact-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,245,255,0.15);
+  border-radius: 12px;
+  padding: 25px;
+  transition: 0.3s;
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  border-color: #00f5ff;
+  box-shadow: 0 0 20px rgba(0,245,255,0.15);
+}
+
+/* ICON */
+.contact-card i {
+  font-size: 28px;
+  color: #00f5ff;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.contact-card h3 {
+  margin-bottom: 5px;
+}
+
+.contact-card p {
+  color: #aab4c8;
+  font-size: 14px;
+}
+
+/* SOCIAL */
+.social-links {
+  margin-top: 40px;
+}
+
+.social-links a {
+  color: #00f5ff;
+  font-size: 22px;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+a.hero-btn {
+  text-decoration: none;
+  display: inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<header class="main-header">
+
+    <div class="logo-container">MC</div>
+
+    <nav class="main-nav" id="navMenu">
+    <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+    <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+    <a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a>
+    <a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a>
+    <a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a>
+    <a href="#certifications" class="nav-link"><i class="fas fa-certificate"></i> Certifications</a>
+</nav>
+
+   <button class="nav-contact-btn" onclick="location.href='#contact'">
+    Contact
+</button>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars" id="menu-icon"></i>
+    </div>
+
+</header>
+
+<section  id="home" class="hero">
+
+    <div class="text-section">
+
+        <h3>WELCOME TO MY WORLD</h3>
+
+        <h1>
+            Hi, I'm
+            <span class="highlight">Micheal Charlet A</span>
+        </h1>
+
+        <h1>
+            I am
+            <span class="typing" id="typed-text"></span>
+        </h1>
+
+        <p>
+            Passionate Full Stack Developer and Data Analyst creating innovative web applications and data-driven solutions.
+        </p>
+
+        <div class="btn-group">
+            <button class="hero-btn primary-btn">My Projects</button>
+           <a href="resume.pdf" target="_blank" class="hero-btn secondary-btn">View CV</a>
+        </div>
+
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/micheal-charlet-a-b682512b1/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Charlet-A"><i class="fab fa-github"></i></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=michealcharletfdo@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+        </div>
+
+    </div>
+
+</section>
+<!-- ABOUT SECTION -->
+<section class="about-section" id="about">
+
+    <div class="about-container">
+
+        <!-- LEFT IMAGE -->
+        <div class="about-image">
+            <div class="image-box">
+                <img src="a.png" alt="Profile Image">
+            </div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="about-content">
+
+            <span class="section-tag">ABOUT ME</span>
+
+            <h2>
+               Designing, Developing & Analyzing
+            </h2>
+
+            <p class="about-text">
+               <span>B.Sc. Mathematics</span> graduate currently pursuing<span> MCA </span>through correspondence, with a strong foundation in<span> Full Stack Development, Data Analytics, and Database Management.</span> Passionate about building scalable web applications and intelligent data-driven solutions using modern technologies.
+            </p>
+
+            <p class="about-text">
+                Driven by curiosity, creativity, and problem-solving, I specialize in developing modern, responsive, and visually engaging digital experiences that combine functionality with elegant design. As a multi-skilled IT professional, I enjoy transforming innovative ideas into smart, interactive applications while analyzing meaningful data insights to create impactful and high-performance solutions.
+            </p>
+<p class="about-text">My goal is to build elegant, scalable, and high-performance digital solutions that seamlessly blend functionality, innovation, and exceptional user experience.</p>
+            <!-- STATS -->
+            <div class="about-stats">
+
+                <div class="stat-box">
+                    <h3>5+</h3>
+                    <p>Projects Completed</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>5+</h3>
+                    <p>Certifications</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>5+</h3>
+                    <p>Technical Skills</p>
+                </div>
+
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="about-buttons">
+                <a href="#contact" class="btn-primary">Let's Connect</a>
+            </div>
+
+        </div>
+    </div>
+</section><section class="skills-section" id="skills">
+
+    <!-- HEADER -->
+    <div class="skills-header">
+
+        <p class="section-tag">MY SKILLS</p>
+
+        <h2>
+            Technical Capabilities
+        </h2>
+
+        <p class="skills-subtext">
+            Transforming ideas into modern and impactful digital experiences.
+        </p>
+
+    </div>
+
+    <!-- SLIDER -->
+    <div class="skills-slider">
+
+       <button class="slide-btn left-btn" onclick="moveSlide(-1)">&#10094;</button>
+        <!-- SKILLS WRAPPER -->
+        <div class="skills-wrapper">
+
+            <div class="skills-grid" id="skillsGrid">
+
+                <!-- CARD 1 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+
+                    <h3>Programming Languages</h3>
+
+                    <p>
+                        Skilled in C, C++, Python, and Java
+                        for developing efficient applications.
+                    </p>
+
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+
+                    <h3>Full Stack Development</h3>
+
+                    <p>
+                        Experienced in HTML, CSS, JavaScript,
+                        jQuery, PHP, and MySQL development.
+                    </p>
+
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                    <h3>Data Analytics</h3>
+
+                    <p>
+                        Knowledge in NumPy, Pandas, SQL,Advanced Excel
+                        Power BI, EDA, and Data Visualization.
+                    </p>
+
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+
+                    <h3>Database Management</h3>
+
+                    <p>
+                        Familiar with MySQL, MongoDB,
+                        NoSQL, and scalable database systems.
+                    </p>
+
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+
+                    <h3> Office Tools</h3>
+
+                    <p>
+                        Proficient in MS Word, Excel,
+                        PowerPoint, and Tally Prime tools.
+                    </p>
+
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="skill-card">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+
+                    <h3>Development Tools</h3>
+
+                    <p>
+                        Experienced with VS Code, GitHub,
+                        WAMP, and XAMPP environments.
+                    </p>
+
+                </div>
+                <!-- CARD -->
+
+<div class="skill-card">
+
+    <div class="skill-icon">
+        <i class="fas fa-keyboard"></i>
+    </div>
+
+    <h3>Typing Skills</h3>
+
+    <p>
+        Proficient in English and Tamil typing with
+        Higher and Lower grade certification.
+    </p>
+
+</div>
+
+            </div>
+
+        </div>
+
+        
+<button class="slide-btn right-btn" onclick="moveSlide(1)">&#10095;</button>
+
+    </div>
+
+</section>
+<!-- =========================
+        EXPERIENCE SECTION
+========================= -->
+
+<section class="experience-section" id="experience">
+
+    <!-- HEADER -->
+    <div class="experience-header">
+
+        <p class="section-tag">EXPERIENCE</p>
+
+        <h2>
+          Career Experience
+        </h2>
+
+    </div>
+
+    <!-- TIMELINE -->
+
+    <div class="timeline">
+
+        <!-- EXPERIENCE 1 -->
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="experience-card">
+
+                <span class="experience-year">
+                    Nov 2025 - Present
+                </span>
+
+                <h3>
+                    Office Administrator
+                </h3>
+
+                <h4>
+                    S. Thartius Engineering Contractors
+                </h4>
+
+                <p>
+Managed accounts, Tally entries, MS Office documentation, and report preparation while also handling editing tasks and daily office administration responsibilities efficiently.                </p>
+
+            </div>
+
+        </div>
+
+        <!-- EXPERIENCE 2 -->
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="experience-card">
+
+                <span class="experience-year">
+                    Apr 2025 - Sep 2025
+                </span>
+
+                <h3>
+                    Teaching Faculty
+                </h3>
+
+                <h4>
+                    Alsalaam Institution
+                </h4>
+
+                <p>
+                   Delivered training in DCA and Programming Languages while assisting students in developing coding, problem-solving, and typing skills through practical learning and guidance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+        PROJECT SECTION
+========================= -->
+
+<section class="projects-section" id="projects">
+
+    <!-- HEADER -->
+
+    <div class="projects-header">
+
+        <p class="section-tag">MY PROJECTS</p>
+
+        <h2>Innovative Projects</h2>
+
+        <p class="projects-subtext">
+            Exploring innovative projects with modern
+            development and interactive experiences.
+        </p>
+
+    </div>
+
+    <!-- TAB SYSTEM -->
+
+    <div class="portfolio-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="project-tabs">
+
+            <div class="tab-btn active"
+                onclick="showProject(0)">
+
+                Multimedia Editing Website
+
+            </div>
+
+            <div class="tab-btn"
+                onclick="showProject(1)">
+
+               Ecommerce Web Application
+
+            </div>
+
+            <div class="tab-btn"
+                onclick="showProject(2)">
+
+                Sales Analysis Solution
+
+            </div>
+
+            <div class="tab-btn"
+                onclick="showProject(3)">
+
+                Data Analytics Dashboard
+
+            </div>
+
+            <div class="tab-btn"
+                onclick="showProject(4)">
+
+                Digital Flipbook System
+
+            </div>
+             <div class="tab-btn"
+                onclick="showProject(5)">
+
+                Personal Portfolio Website
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="project-display">
+
+            <!-- PROJECT 1 -->
+
+            <div class="project-content active-project">
+
+                <span class="project-count">
+                    Project 01
+                </span>
+
+                <h3>
+                     JV Creation
+                </h3>
+
+                <p>
+                   JV Creations is a web-based creative media editing platform that allows users to edit photos, videos, and collages with an interactive and modern UI experience. The platform is designed using frontend animation techniques and backend authenticationincludes secure login and signup functionality with session handling.
+                </p>
+
+                <a href="https://charlet-a.github.io/jvcreation/"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!-- PROJECT 2 -->
+
+            <div class="project-content">
+
+                <span class="project-count">
+                    Project 02
+                </span>
+
+                <h3>
+                    Babee 
+                </h3>
+
+                <p>
+                    Babee is a full-stack e-commerce web application designed for baby products. It provides a a smooth shopping experience for customers while giving administrators full control over product management, orders, and analytics through dashboard.It demonstrates strong skills in full-stack web development, database handling, authentication systems.
+                </p>
+
+                <a href="https://charlet-a.github.io/babyworld/"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!-- PROJECT 3 -->
+
+            <div class="project-content">
+
+                <span class="project-count">
+                    Project 03
+                </span>
+
+                <h3>
+                    SuperStore Sales Analysis
+                </h3>
+
+                <p>
+This project delivers an end-to-end sales analytics solution using the Superstore dataset, focusing on data cleaning, SQL analysis, Advanced Excel, and Power BI dashboards. It transforms raw data into meaningful insights, enabling data-driven business decision-making through effective visualization and analysis.
+                </p>
+
+                <a href="https://github.com/Charlet-A/SalesAnalysis"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!-- PROJECT 4 -->
+
+            <div class="project-content">
+
+                <span class="project-count">
+                    Project 04
+                </span>
+
+                <h3>
+                   Data Analyst Job Market Analysis
+                </h3>
+
+                <p>
+                    Developed a comprehensive Data Analyst Job Market Analysis project by cleaning and transforming raw job posting data, performing exploratory data analysis, writing advanced SQL queries and building interactive Power BI dashboards to uncover hiring trends, salary insights, company statistics, and industry demand.
+                </p>
+
+                <a href="https://github.com/Charlet-A/DAjobAnalysis"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!-- PROJECT 5 -->
+
+            <div class="project-content">
+
+                <span class="project-count">
+                    Project 05
+                </span>
+
+                <h3>
+                    PlaySprint Sports Academy Flipbook 
+                </h3>
+
+                <p>
+                    This flipbook is a modern interactive PlaySprint sports academy flipbook website designed with immersive animations, stylish UI, and responsive mobile-friendly features. The project showcases the academy’s vision through a realistic page-flipping experience.The website creates an engaging and visually appealing digital brochure experience.
+                </p>
+
+                <a href="https://charlet-a.github.io/flipbook/"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+<div class="project-content">
+
+                <span class="project-count">
+                    Project 06
+                </span>
+
+                <h3>
+                    Personal Portfolio
+                </h3>
+
+                <p>
+Created a visually engaging personal portfolio
+website featuring modern UI design, smooth user
+interactions, responsive layouts, and dynamic
+project presentation for a professional digital presence.                </p>
+
+                <a href="https://charlet-a.github.io/portfolio/"
+                    class="project-view-btn">
+
+                    View Project
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+    CERTIFICATION TIMELINE
+========================= -->
+
+<section class="certification-section" id="certifications">
+
+    <!-- HEADER -->
+
+    <div class="certification-header">
+
+        <p class="section-tag">CERTIFICATIONS</p>
+
+        <h2>
+            Certifications & Credentials
+        </h2>
+
+        <p class="certification-subtext">
+            Professional certifications and technical
+            qualifications achieved through continuous learning.
+        </p>
+
+    </div>
+
+    <!-- TIMELINE -->
+
+    <div class="certificate-timeline">
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    C & C++ Programming
+                </h3>
+
+                <span>
+                    TCEDS Computer Education &
+                    Technical Education Society
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    Java Programming
+                </h3>
+
+                <span>
+                    TCEDS Computer Education &
+                    Technical Education Society
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    Python Programming
+                </h3>
+
+                <span>
+                    TCEDS Computer Education &
+                    Technical Education Society
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    Web Designing
+                </h3>
+
+                <span>
+                    TCEDS Computer Education &
+                    Technical Education Society
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    DCO Certification
+                </h3>
+
+                <span>
+                    TCEDS Computer Education &
+                    Technical Education Society
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    English Typing Higher & Lower
+                </h3>
+
+                <span>
+                    Government Technical Examination
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    Tamil Typing Higher & Lower
+                </h3>
+
+                <span>
+                    Government Technical Examination
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM -->
+
+        <div class="certificate-item">
+
+            <div class="certificate-dot"></div>
+
+            <div class="certificate-content">
+
+                <h3>
+                    Data Analytics Certification
+                </h3>
+
+                <span>
+                    Postulate Info Tech Private Limited
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="contact-section" id="contact">
+
+  <div class="contact-header">
+    <h2>Contact Me</h2>
+    <p>Let’s connect for projects or opportunities</p>
+  </div>
+
+  <div class="contact-grid">
+
+    <!-- Email -->
+    <div class="contact-card">
+      <i class="fa-solid fa-envelope"></i>
+      <h3>Email</h3>
+      <p>michealcharletfdo@gmail.com</p>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="contact-card">
+      <i class="fa-brands fa-whatsapp"></i>
+      <h3>WhatsApp</h3>
+      <p>+91 6380409904</p>
+    </div>
+
+    <!-- Location -->
+    <div class="contact-card">
+      <i class="fa-solid fa-location-dot"></i>
+      <h3>Location</h3>
+      <p>Thoothukudi-628005, Tamil Nadu, India</p>
+    </div>
+
+  </div>
+
+  <!-- Social Links -->
+  <div class="social-links">
+   <a href="https://www.linkedin.com/in/micheal-charlet-a-b682512b1/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Charlet-A"><i class="fab fa-github"></i></a>
+  </div>
+
+</section>
+<button id="progressScroll" onclick="scrollToSection()">
+    <svg width="70" height="70">
+        <defs>
+            <linearGradient id="gradientStroke">
+                <stop offset="0%" stop-color="#00f7ff"/>
+                <stop offset="100%" stop-color="#8a2eff"/>
+            </linearGradient>
+        </defs>
+        <circle class="bg-circle" cx="35" cy="35" r="28" />
+        <circle id="progress-path" class="progress-path" cx="35" cy="35" r="28" />
+    </svg>
+    <div class="arrow-box"><i class="fas fa-angle-double-down"></i></div>
+</button>
+<script>
+function toggleMenu(){
+    const nav = document.getElementById("navMenu");
+    const icon = document.getElementById("menu-icon");
+
+    nav.classList.toggle("active");
+    icon.classList.toggle("fa-bars");
+    icon.classList.toggle("fa-times");
+}
+
+const textElement = document.getElementById("typed-text");
+
+const roles = [
+    "Full Stack Developer",
+    "Data Analyst",
+    "Web Designer",
+    "Multi-Skilled IT Professional",
+    "Problem Solver"
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+
+function type(){
+    if(charIndex < roles[roleIndex].length){
+        textElement.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type,100);
+    }else{
+        setTimeout(erase,2000);
+    }
+}
+
+function erase(){
+    if(charIndex > 0){
+        textElement.textContent =
+        roles[roleIndex].substring(0,charIndex-1);
+
+        charIndex--;
+        setTimeout(erase,50);
+    }else{
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(type,500);
+    }
+}
+
+type();
+const progressBtn = document.getElementById("progressScroll");
+const progressPath = document.getElementById("progress-path");
+const pathLength = 176;
+
+window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressPath.style.strokeDashoffset = pathLength - (scrollTop / docHeight * pathLength);
+    
+    progressBtn.classList.toggle("show", scrollTop > 200);
+    progressBtn.classList.toggle("top-mode", (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50);
+});
+
+function scrollToSection() {
+    if(progressBtn.classList.contains("top-mode")) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+    }
+}
+/* =========================
+      SKILLS SLIDER LOGIC
+========================= */
+
+const grid = document.getElementById("skillsGrid");
+let currentIndex = 0;
+
+function moveSlide(direction) {
+    const grid = document.getElementById("skillsGrid");
+    const cards = document.querySelectorAll(".skill-card");
+    const containerWidth = document.querySelector(".skills-wrapper").offsetWidth;
+    
+    // Total gap calculation
+    const gap = 30;
+    const cardWidth = 330;
+    
+    // Evalo cards screen-la fit aagum?
+    const cardsPerView = Math.floor(containerWidth / (cardWidth + gap));
+    const totalCards = cards.length;
+    
+    // Max index (yevolo tharam move aagalam)
+    const maxIndex = totalCards - cardsPerView;
+    
+    currentIndex += direction;
+
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+    // Movement calculation
+    const moveDistance = currentIndex * (cardWidth + gap);
+    grid.style.transform = `translateX(-${moveDistance}px)`;
+}
+window.addEventListener("resize", () => {
+    if (window.innerWidth <= 768) {
+        grid.style.transform = "translateX(0)";
+    }
+});
+/* =========================
+        PROJECT TABS
+========================= */
+
+const tabs =
+    document.querySelectorAll(".tab-btn");
+
+const projects =
+    document.querySelectorAll(".project-content");
+
+function showProject(index){
+
+    /* REMOVE ACTIVE */
+
+    tabs.forEach((tab)=>{
+        tab.classList.remove("active");
+    });
+
+    projects.forEach((project)=>{
+        project.classList.remove("active-project");
+    });
+
+    /* ADD ACTIVE */
+
+    tabs[index].classList.add("active");
+
+    projects[index].classList.add("active-project");
+}
+</script>
+
+</body>
+</html>
